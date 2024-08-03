@@ -5,3 +5,6 @@
   <%= form.text_field :zip_code %>
   <%= form.submit "Search" %>
 <% end %>
+<% if @zip_code %>
+  <p>Zip Code Searched: <%= @zip_code %></p>
+<% end %>
