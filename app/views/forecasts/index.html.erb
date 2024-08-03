@@ -1,2 +1,7 @@
-<h1>Forecasts#index</h1>
-<p>Find me in app/views/forecasts/index.html.erb</p>
+<h1>Weather Forecaster</h1>
+<p>Enter a zip code to retrieve weather data</p>
+<%= form_with do |form| %>
+  <%= form.label :zip_code, "Zip Code:" %>
+  <%= form.text_field :zip_code %>
+  <%= form.submit "Search" %>
+<% end %>
