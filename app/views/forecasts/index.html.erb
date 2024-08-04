@@ -7,5 +7,20 @@
 <% end %>
 <% if address %>
   <p>Address Searched: <%= address %></p>
-  <p>Current Temperate: <%= current_temperature %>°F
+  <p>Current Temperate: <%= current_temperature %>°F</p>
+  <table>
+    <caption>Extended Forecast</caption>
+    <tr>
+      <th>Date</th>
+      <th>High</th>
+      <th>Low</th>
+    </tr>
+    <% extended_forecast.map do |forecast| %>
+      <tr>
+        <td><%= forecast[:date] %></td>
+        <td><%= forecast[:high] %></td>
+        <td><%= forecast[:low] %></td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
