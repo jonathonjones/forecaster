@@ -15,5 +15,5 @@ current temperature (Bonus points - Retrieve high/low and/or extended forecast)
 
 - There should be a front-end for all of this (not purely an API)
 - It is better to do this with minimal dependencies.
-- - Therefore, I did not use projects like https://github.com/t27duck/weatherboy.
+- - Therefore, I did not use projects like <https://github.com/t27duck/weatherboy>.
 - - Similarly, I limited installation of rails (rails new --minimal --without-activerecord)

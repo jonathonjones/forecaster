@@ -32,6 +32,8 @@ class ForecastsController < ApplicationController
   helper_method :longitude
 
   def weather
-
+    uri = URI.parse("https://api.open-meteo.com/v1/forecast?latitude=#{latitude}&longitude=#{longitude}&current=temperature_2m&format=json&temperature_unit=fahrenheit")
+    JSON.parse(Net::HTTP.get(uri, {Referer: 'Forecasts Toy Project'}))
   end
+  helper_method :weather
 end
