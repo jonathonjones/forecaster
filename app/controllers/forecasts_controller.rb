@@ -11,20 +11,17 @@ class ForecastsController < ApplicationController
   end
   helper_method :address
 
-  # Data comes in as
-  # "current"=>{"time"=>"2024-08-04T02:30", "interval"=>900, "temperature_2m"=>55.2}
+  # returns Float as degrees Fahrenheit
   def current_temperature
-    weather["current"]["temperature_2m"]
+    weather.current_temperature
   end
   helper_method :current_temperature
 
-  # Data comes in as
-  # "daily"=>{"time"=>["2024-08-04", ...], "temperature_2m_max"=>[91.1, ...], "temperature_2m_min"=>[70.0, ...]}}
+  # Highs and Lows for the next several days, including today
+  # returns an Array of Hashes
+  # example: [{date: "2024-08-04", high: 91.1, low: 70.0}]
   def extended_forecast
-    daily = weather["daily"]
-    daily["time"].map.with_index do |date, index|
-      {date: date, high: daily["temperature_2m_max"][index], low: daily["temperature_2m_min"][index]}
-    end
+    weather.extended_forecast
   end
   helper_method :extended_forecast
 
@@ -65,7 +62,7 @@ class ForecastsController < ApplicationController
   # See https://open-meteo.com/en/docs
   def weather
     @weather ||= Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
-      Weather.new(latitude:, longitude:).fetch
+      Weather.new(latitude:, longitude:)
     end
   end
 end
