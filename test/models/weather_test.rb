@@ -22,7 +22,7 @@ class WeatherTest < ActiveSupport::TestCase
             "temperature_2m_min" => [74.8, 69.8, 62.6, 59.4, 56.7, 63.1, 65.3]
           }
         }
-      assert_equal expected, weather.fetch
+      assert_equal expected, weather.send(:data)
     end
   end
 

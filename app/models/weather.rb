@@ -13,10 +13,6 @@ class Weather
     data["current"]["temperature_2m"]
   end
 
-  def data
-    @data ||= fetch
-  end
-
   # Data comes in as
   # "daily"=>{"time"=>["2024-08-04", ...], "temperature_2m_max"=>[91.1, ...], "temperature_2m_min"=>[70.0, ...]}}
   # returns an Array of Hashes
@@ -26,6 +22,16 @@ class Weather
     daily["time"].map.with_index do |date, index|
       {date: date, high: daily["temperature_2m_max"][index], low: daily["temperature_2m_min"][index]}
     end
+  end
+
+  def as_json(options = {})
+    {current_temperature: current_temperature, extended_forecast: extended_forecast}
+  end
+
+  private
+
+  def data
+    @data ||= fetch
   end
 
   def fetch
