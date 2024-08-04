@@ -7,7 +7,9 @@ class ForecastsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "can post to index" do
-    post forecasts_index_url, params: {zip_code: "12345"}
+    post forecasts_index_url, params: {address: "12345"}
     assert_response :success
   end
+
+  test ''
 end

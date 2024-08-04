@@ -1,10 +1,11 @@
 <h1>Weather Forecaster</h1>
-<p>Enter a zip code to retrieve weather data</p>
+<p>Enter an Address to retrieve weather data</p>
 <%= form_with do |form| %>
-  <%= form.label :zip_code, "Zip Code:" %>
-  <%= form.text_field :zip_code %>
+  <%= form.label :address, "Address:" %>
+  <%= form.text_field :address %>
   <%= form.submit "Search" %>
 <% end %>
-<% if @zip_code %>
-  <p>Zip Code Searched: <%= @zip_code %></p>
+<% if address %>
+  <p>Address Searched: <%= address %></p>
+  <p>Latitude: <%= latitude %>
 <% end %>
