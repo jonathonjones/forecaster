@@ -6,6 +6,8 @@
   <%= form.submit "Search" %>
 <% end %>
 <% if address %>
+  <p>Geocode Data: <%= geocode_data %>
+  <p>Zip Code: <%= zipcode %>
   <p>Address Searched: <%= address %></p>
   <p>Current Temperate: <%= current_temperature %>°F</p>
   <table>
