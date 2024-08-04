@@ -11,6 +11,11 @@ class ForecastsController < ApplicationController
   end
   helper_method :address
 
+  def any_geocode_data?
+    geocode_data.any?
+  end
+  helper_method :any_geocode_data?
+
   # returns Float as degrees Fahrenheit
   def current_temperature
     weather.current_temperature
@@ -30,13 +35,8 @@ class ForecastsController < ApplicationController
   end
   helper_method :fetched_from_cache?
 
-  def geocode_data
-    @geocode_data ||= fetch_geocode_data
-  end
-  helper_method :geocode_data
-
   def zipcode
-    geocode_data.first["address"]["postcode"]
+    geocode_data.zipcode
   end
   helper_method :zipcode
 
@@ -44,19 +44,16 @@ class ForecastsController < ApplicationController
     "zipcode#{zipcode}"
   end
 
-  # See https://nominatim.org/release-docs/develop/api/Search/
-  def fetch_geocode_data
-    address_component = URI.encode_www_form_component(address)
-    uri = URI.parse("https://nominatim.openstreetmap.org/search.php?q=#{address_component}&format=jsonv2&addressdetails=1")
-    JSON.parse(Net::HTTP.get(uri, {Referer: "Forecasts Toy Project"}))
+  def geocode_data
+    @geocode_data ||= Geocode.new(address:)
   end
 
   def latitude
-    geocode_data.first["lat"]
+    geocode_data.latitude
   end
 
   def longitude
-    geocode_data.first["lon"]
+    geocode_data.longitude
   end
 
   # See https://open-meteo.com/en/docs

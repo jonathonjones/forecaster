@@ -7,7 +7,7 @@
 <% end %>
 <% if address %>
   <p>Address Searched: <%= address %></p>
-  <% if geocode_data.any? %>
+  <% if any_geocode_data? %>
     <p>Zipcode: <%= zipcode %></p>
     <% if fetched_from_cache? %>
       <p>The below weather information was fetched from cache for zip code <%= zipcode %></p>
@@ -30,6 +30,6 @@
       <% end %>
     </table>
   <% else%>
-    <p>This query did not find a geolocation</p>
+    <p>This query did not find any geocode data</p>
   <% end %>
 <% end %>

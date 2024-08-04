@@ -48,7 +48,7 @@ class ForecastsControllerTest < ActionDispatch::IntegrationTest
     VCR.use_cassette(method_name) do
       post forecasts_index_url, params: {address: "1967 Runolfsdottir Well Suite 681"}
       assert_response :success
-      assert_match "This query did not find a geolocation", @response.body
+      assert_match "This query did not find any geocode data", @response.body
     end
   end
 end
