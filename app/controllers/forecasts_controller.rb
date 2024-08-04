@@ -2,17 +2,7 @@ class ForecastsController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json do
-        if address
-          if any_geocode_data?
-            render json: weather
-          else
-            render json: {error: "This query did not find any geocode data"}
-          end
-        else
-          render json: {}
-        end
-      end
+      format.json { render json: json_data }
     end
   end
 
@@ -58,6 +48,17 @@ class ForecastsController < ApplicationController
 
   def geocode_data
     @geocode_data ||= Geocode.new(address:)
+  end
+
+  def json_data
+    return {} unless address
+    return {error: "This query did not find any geocode data"} unless any_geocode_data?
+
+    {
+      fetched_from_cache: fetched_from_cache?,
+      current_temperature: current_temperature,
+      extended_forecast: extended_forecast
+    }
   end
 
   def latitude

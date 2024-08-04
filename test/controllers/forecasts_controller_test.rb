@@ -57,6 +57,7 @@ class ForecastsControllerTest < ActionDispatch::IntegrationTest
       post forecasts_index_url, params: {address: "1600 Pennsylvania Ave NW Washington, DC", format: :json}
       expected =
         {
+          "fetched_from_cache" => false,
           "current_temperature" => 87.5,
           "extended_forecast" =>
             [

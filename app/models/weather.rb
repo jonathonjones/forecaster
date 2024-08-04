@@ -24,10 +24,6 @@ class Weather
     end
   end
 
-  def as_json(options = {})
-    {current_temperature: current_temperature, extended_forecast: extended_forecast}
-  end
-
   private
 
   def data
