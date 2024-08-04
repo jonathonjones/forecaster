@@ -43,12 +43,24 @@ class ForecastsController < ApplicationController
   end
   helper_method :zipcode
 
+  def cache_key
+    "zipcode#{zipcode}"
+  end
+
   # See https://nominatim.org/release-docs/develop/api/Search/
   def fetch_geocode_data
     address_component = URI.encode_www_form_component(address)
     uri = URI.parse("https://nominatim.openstreetmap.org/search.php?q=#{address_component}&format=jsonv2&addressdetails=1")
     JSON.parse(Net::HTTP.get(uri, {Referer: "Forecasts Toy Project"}))
   end
+
+  # See https://open-meteo.com/en/docs
+  def fetch_weather
+    Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
+      uri = URI.parse("https://api.open-meteo.com/v1/forecast?latitude=#{latitude}&longitude=#{longitude}&current=temperature_2m&format=json&temperature_unit=fahrenheit&daily=temperature_2m_max,temperature_2m_min")
+      JSON.parse(Net::HTTP.get(uri, {Referer: "Forecasts Toy Project"}))
+    end
+  end  
 
   def latitude
     geocode_data.first["lat"]
@@ -60,17 +72,5 @@ class ForecastsController < ApplicationController
 
   def weather
     @weather ||= fetch_weather
-  end
-
-  # See https://open-meteo.com/en/docs
-  def fetch_weather
-    Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
-      uri = URI.parse("https://api.open-meteo.com/v1/forecast?latitude=#{latitude}&longitude=#{longitude}&current=temperature_2m&format=json&temperature_unit=fahrenheit&daily=temperature_2m_max,temperature_2m_min")
-      JSON.parse(Net::HTTP.get(uri, {Referer: "Forecasts Toy Project"}))
-    end
-  end
-
-  def cache_key
-    "zipcode#{zipcode}"
   end
 end
