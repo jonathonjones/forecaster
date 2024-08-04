@@ -122,7 +122,7 @@ class GeocodeTest < ActiveSupport::TestCase
             "boundingbox" => ["38.8973817", "38.8977680", "-77.0357843", "-77.0355017"]
           }
         ]
-      assert_equal expected, geocode.fetch
+      assert_equal expected, geocode.send(:fetch)
     end
   end
 

@@ -69,7 +69,6 @@ class ForecastsController < ApplicationController
     geocode_data.longitude
   end
 
-  # See https://open-meteo.com/en/docs
   def weather
     @weather ||= Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
       Weather.new(latitude:, longitude:)
