@@ -7,8 +7,8 @@
 <% end %>
 <% if address %>
   <p>Address Searched: <%= address %></p>
-  <p>Zipcode: <%= zipcode %></p>
   <% if geocode_data.any? %>
+    <p>Zipcode: <%= zipcode %></p>
     <% if fetched_from_cache? %>
       <p>The below weather information was fetched from cache for zip code <%= zipcode %></p>
     <% end %>

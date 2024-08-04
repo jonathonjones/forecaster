@@ -43,4 +43,12 @@ class ForecastsControllerTest < ActionDispatch::IntegrationTest
       assert_equal expected, @controller.helpers.extended_forecast
     end
   end
+
+  test "handles addresses that cannot be found" do
+    VCR.use_cassette(method_name) do
+      post forecasts_index_url, params: {address: "1967 Runolfsdottir Well Suite 681"}
+      assert_response :success
+      assert_match "This query did not find a geolocation", @response.body
+    end
+  end
 end
