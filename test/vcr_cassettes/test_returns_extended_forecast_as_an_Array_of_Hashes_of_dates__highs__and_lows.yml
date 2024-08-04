@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.open-meteo.com/v1/forecast?current=temperature_2m&daily=temperature_2m_max,temperature_2m_min&format=json&latitude=42.345695750000004&longitude=-71.11946084959486&temperature_unit=fahrenheit
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Referer:
+      - Forecasts Toy Project
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.open-meteo.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 04 Aug 2024 04:51:51 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJsYXRpdHVkZSI6NDIuMzQ2OTcsImxvbmdpdHVkZSI6LTcxLjEwNzA1NiwiZ2VuZXJhdGlvbnRpbWVfbXMiOjAuMDM0MDkzODU2ODExNTIzNDQsInV0Y19vZmZzZXRfc2Vjb25kcyI6MCwidGltZXpvbmUiOiJHTVQiLCJ0aW1lem9uZV9hYmJyZXZpYXRpb24iOiJHTVQiLCJlbGV2YXRpb24iOjI0LjAsImN1cnJlbnRfdW5pdHMiOnsidGltZSI6Imlzbzg2MDEiLCJpbnRlcnZhbCI6InNlY29uZHMiLCJ0ZW1wZXJhdHVyZV8ybSI6IsKwRiJ9LCJjdXJyZW50Ijp7InRpbWUiOiIyMDI0LTA4LTA0VDA0OjQ1IiwiaW50ZXJ2YWwiOjkwMCwidGVtcGVyYXR1cmVfMm0iOjc2LjZ9LCJkYWlseV91bml0cyI6eyJ0aW1lIjoiaXNvODYwMSIsInRlbXBlcmF0dXJlXzJtX21heCI6IsKwRiIsInRlbXBlcmF0dXJlXzJtX21pbiI6IsKwRiJ9LCJkYWlseSI6eyJ0aW1lIjpbIjIwMjQtMDgtMDQiLCIyMDI0LTA4LTA1IiwiMjAyNC0wOC0wNiIsIjIwMjQtMDgtMDciLCIyMDI0LTA4LTA4IiwiMjAyNC0wOC0wOSIsIjIwMjQtMDgtMTAiXSwidGVtcGVyYXR1cmVfMm1fbWF4IjpbODcuNCw5NC4zLDc4LjMsNjkuNSw3NC4xLDg0LjAsNzkuOV0sInRlbXBlcmF0dXJlXzJtX21pbiI6Wzc0LjgsNjkuOCw2Mi42LDU5LjQsNTYuNyw2My4xLDY1LjNdfX0=
+  recorded_at: Sun, 04 Aug 2024 04:51:52 GMT
+recorded_with: VCR 6.2.0
