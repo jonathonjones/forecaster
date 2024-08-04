@@ -28,6 +28,11 @@ class ForecastsController < ApplicationController
   end
   helper_method :extended_forecast
 
+  def fetched_from_cache?
+    Rails.cache.read(cache_key).present?
+  end
+  helper_method :fetched_from_cache?
+
   def geocode_data
     @geocode_data ||= fetch_geocode_data
   end
@@ -59,7 +64,13 @@ class ForecastsController < ApplicationController
 
   # See https://open-meteo.com/en/docs
   def fetch_weather
-    uri = URI.parse("https://api.open-meteo.com/v1/forecast?latitude=#{latitude}&longitude=#{longitude}&current=temperature_2m&format=json&temperature_unit=fahrenheit&daily=temperature_2m_max,temperature_2m_min")
-    JSON.parse(Net::HTTP.get(uri, {Referer: "Forecasts Toy Project"}))
+    Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
+      uri = URI.parse("https://api.open-meteo.com/v1/forecast?latitude=#{latitude}&longitude=#{longitude}&current=temperature_2m&format=json&temperature_unit=fahrenheit&daily=temperature_2m_max,temperature_2m_min")
+      JSON.parse(Net::HTTP.get(uri, {Referer: "Forecasts Toy Project"}))
+    end
+  end
+
+  def cache_key
+    "zipcode#{zipcode}"
   end
 end

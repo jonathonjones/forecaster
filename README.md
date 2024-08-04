@@ -17,3 +17,7 @@ Pulls weather data to make a forecast for a particular location, part of a code 
 - It is better to do this with minimal dependencies.
 - - Therefore, I did not use projects like <https://github.com/t27duck/weatherboy>.
 - - Similarly, I limited installation of rails (rails new --minimal --without-activerecord)
+
+## Notes
+
+- Rails caching is off in development, so to see the caching behavior run 'rails dev:cache' to toggle caching.

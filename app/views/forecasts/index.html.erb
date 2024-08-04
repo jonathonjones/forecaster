@@ -6,23 +6,30 @@
   <%= form.submit "Search" %>
 <% end %>
 <% if address %>
-  <p>Geocode Data: <%= geocode_data %>
-  <p>Zip Code: <%= zipcode %>
   <p>Address Searched: <%= address %></p>
-  <p>Current Temperate: <%= current_temperature %>°F</p>
-  <table>
-    <caption>Extended Forecast</caption>
-    <tr>
-      <th>Date</th>
-      <th>High</th>
-      <th>Low</th>
-    </tr>
-    <% extended_forecast.map do |forecast| %>
-      <tr>
-        <td><%= forecast[:date] %></td>
-        <td><%= forecast[:high] %></td>
-        <td><%= forecast[:low] %></td>
-      </tr>
+  <p>Zipcode: <%= zipcode %></p>
+  <% if geocode_data.any? %>
+    <% if fetched_from_cache? %>
+      <p>The below weather information was fetched from cache for zip code <%= zipcode %></p>
     <% end %>
-  </table>
+
+    <p>Current Temperate: <%= current_temperature %>°F</p>
+    <table>
+      <caption>Extended Forecast</caption>
+      <tr>
+        <th>Date</th>
+        <th>High</th>
+        <th>Low</th>
+      </tr>
+      <% extended_forecast.map do |forecast| %>
+        <tr>
+          <td><%= forecast[:date] %></td>
+          <td><%= forecast[:high] %></td>
+          <td><%= forecast[:low] %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else%>
+    <p>This query did not find a geolocation</p>
+  <% end %>
 <% end %>
