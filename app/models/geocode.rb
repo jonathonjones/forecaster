@@ -1,3 +1,5 @@
+# Geocode performs geocoding on an address to find the latitude, longitude, and zipcode.
+# The underlying service allows for addresses that are not fully specified, and therefore so does this class.
 class Geocode
   attr_reader :address
 
@@ -9,10 +11,14 @@ class Geocode
     data.any?
   end
 
+  # returns a Decimal as a String
+  # example: "42.345695750000004"
   def latitude
     data.first["lat"]
   end
 
+  # returns a Decimal as a String
+  # example: "-71.11946084959486"
   def longitude
     data.first["lon"]
   end

@@ -1,3 +1,5 @@
+# Weather gets the current temperature and highs and lows for the next several days
+# for a particular latitude and longitude.
 class Weather
   attr_reader :latitude, :longitude
 
@@ -31,6 +33,9 @@ class Weather
   end
 
   # See https://open-meteo.com/en/docs
+  # temperature_2m refers to the temperature at 2 meters off the ground
+  # temperature_2m_max is the high temperature for a date at 2 meters off the ground
+  # temperature_2m_min is the low temperature for a date at 2 meters off the ground
   def fetch
     uri = URI.parse("https://api.open-meteo.com/v1/forecast?latitude=#{latitude}&longitude=#{longitude}&current=temperature_2m&format=json&temperature_unit=fahrenheit&daily=temperature_2m_max,temperature_2m_min")
     JSON.parse(Net::HTTP.get(uri, {Referer: "Forecasts Toy Project"}))
