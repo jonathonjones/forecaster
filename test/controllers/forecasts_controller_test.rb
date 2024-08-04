@@ -11,5 +11,5 @@ class ForecastsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test ''
+  test ""
 end
