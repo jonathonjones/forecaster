@@ -1,6 +1,4 @@
 class ForecastsController < ApplicationController
-  require "net/http"
-
   def index
   end
 
@@ -16,7 +14,7 @@ class ForecastsController < ApplicationController
   end
   helper_method :any_geocode_data?
 
-  # returns Float as degrees Fahrenheit
+  # returns Float for degrees Fahrenheit
   def current_temperature
     weather.current_temperature
   end
