@@ -31,3 +31,4 @@ Pulls weather data to make a forecast for a particular location, part of a code 
 ## Notes
 
 - Rails caching is off in development, so to see the caching behavior run 'rails dev:cache' to toggle caching.
+- Basic styling is provided by <https://picocss.com/docs>
