@@ -54,13 +54,6 @@ class ForecastsController < ApplicationController
     JSON.parse(Net::HTTP.get(uri, {Referer: "Forecasts Toy Project"}))
   end
 
-  # See https://open-meteo.com/en/docs
-  def fetch_weather
-    Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
-      Weather.new(latitude:, longitude:).fetch
-    end
-  end  
-
   def latitude
     geocode_data.first["lat"]
   end
@@ -69,7 +62,10 @@ class ForecastsController < ApplicationController
     geocode_data.first["lon"]
   end
 
+  # See https://open-meteo.com/en/docs
   def weather
-    @weather ||= fetch_weather
+    @weather ||= Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
+      Weather.new(latitude:, longitude:).fetch
+    end
   end
 end
